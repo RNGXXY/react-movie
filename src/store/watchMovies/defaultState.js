@@ -1,3 +1,6 @@
 export default {
-    watchMovieList:[]
+    watchMovieList:[],
+    isShowingList:[],
+    soonShowingList:[],
+    cinemasList:[]
 }

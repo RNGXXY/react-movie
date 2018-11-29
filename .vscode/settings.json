@@ -1,0 +1,5 @@
+{
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "powermode.enabled": true,
+    "powermode.enableShake": false
+}

@@ -3,29 +3,16 @@ import { HomeSwiperWrapper , BgBlur , HomeSwiperImgBox } from './styledComponent
 
 import { Carousel, WingBlank } from 'antd-mobile'; 
 
-import connect from '@Connect'
+import { connect } from 'murlin-connect'
 
 class HomeSwiper extends PureComponent{
     state = {
-        data: this.props.watchMovies[0],
+        data: this.props.watchMovies.watchMovieList[0],
         imgHeight: 176,
         slideIndex : 0
     }
-    // componentDidMount() {
-    //     setTimeout(() => {
-    //         this.setState({
-    //         data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-    //         });
-    //     }, 100);
-    // }
 
     // setState（）方法是异步的，因为执行的时候不会马上render，所以把他说成是异步的
-    // async componentDidMount(){
-    //     await this.props.watchMovies_actions.getListAsync()
-    //     this.setState({
-    //         data:this.props.watchMovies[0]
-    //     })
-    // }
     render(){
         let {data} = this.state
         if(!data) return '';

@@ -1,33 +1,56 @@
 import React,{ PureComponent } from 'react'
-import mySwiper from 'swiper'
-import connect from '@Connect'
+import { connect } from 'murlin-connect'
+import BScroll from 'better-scroll'
 
 // 功能组件
-import { Header , Icon , Search , Swiper} from '@Commons'
+import { Header , Icon  , Swiper , Active} from '@Commons' 
 // 子组件
 import HomeSwiper from './HomeSwiper'
 // 样式组件
-import { HomeWrapper , HomeCommonSwiper } from './styledComponents' 
+import { HomeWrapper , HomeCommonSwiper , HomeActive } from './styledComponents' 
 
 import { NoticeBar } from 'antd-mobile';
-
+ 
 class HomeContainer extends PureComponent{
-    state = {
-        commonSwiperData:[],
+    constructor () {
+        super()
+        this.scroll = {
+            tool: null
+        }
+        this.state = {
+            commonSwiperData:[],
+            activeData:[]
+        }
     }
+    
     async componentDidMount(){
         await this.props.watchMovies_actions.getListAsync()
+        let {watchMovieList} =  this.props.watchMovies
         this.setState({
-            commonSwiperData:this.props.watchMovies.splice(1,2)
+            commonSwiperData:watchMovieList.splice(1,watchMovieList.length-2),
+            activeData:watchMovieList[watchMovieList.length-1]
         })
         // console.log(this.state.commonSwiperData)
+        this.scroll.tool = new BScroll(this.el, {
+            pullUpLoad: {
+                threshold: 50
+            },
+            click: true
+        })
         
     }
+
+    
+
+
     render(){
         let {commonSwiperData} = this.state
         if(!commonSwiperData.length) return '';
+        
         return(
-            <HomeWrapper>
+            <HomeWrapper ref={el=>this.el=el}>
+                
+                <div className='homeBetter' >
                 <Header
                     icon={<Icon type={'folder-o'}/>}
                     rightContent={<Icon type={'search'}/>}
@@ -40,8 +63,16 @@ class HomeContainer extends PureComponent{
                 </NoticeBar>
                 <HomeSwiper/>
                 {/* <Search/> */}
-                    {this.renderCommonSwiper(commonSwiperData)}
-                     
+                {/* 正在售票的swiper，不止一个 */}
+                {this.renderCommonSwiper(commonSwiperData)}
+                {/* 活动的swiper */}
+                <HomeActive>
+                    <Active 
+                        swiperTitle={this.state.activeData.name}
+                        swiperData = { this.state.activeData } 
+                    />
+                </HomeActive>
+                </div>
             </HomeWrapper>
             
         )
@@ -55,6 +86,12 @@ class HomeContainer extends PureComponent{
                 <Swiper
                     swiperTitle={item.name}
                     swiperData = { item.list } 
+                    swiperConfig = {{
+                        slidesPerView : 3,
+                        spaceBetween : 20,
+                        freeMode : true,
+                        freeModeMomentumBounceRatio : 3,
+                    }}
                 >
                 </Swiper>
             </HomeCommonSwiper>

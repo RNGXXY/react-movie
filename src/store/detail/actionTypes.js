@@ -1,0 +1,1 @@
+export const GET_RECOMMEND_DATA  = 'GET_RECOMMEND_DATA'

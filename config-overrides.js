@@ -1,3 +1,5 @@
+
+// 需要使用react-app-rewired工具来做配置文件
 const { injectBabelPlugin } = require('react-app-rewired');
 
 const PATH = require('path')
@@ -8,6 +10,7 @@ function resolve(url) {
 
 module.exports = function override(config, env) {
     config = injectBabelPlugin(['import', { libraryName: 'antd-mobile', style: 'css' }], config);
+    config = injectBabelPlugin(['@babel/plugin-proposal-decorators', { "legacy": true }], config);
 
      // 配置别名
     //  跟vue不一样的是，这里用的是键值对
@@ -20,7 +23,7 @@ module.exports = function override(config, env) {
         '@Hoc': resolve('components/hoc'),
         '@Pages': resolve('pages'),
         '@Libs': resolve('libs'),
-        '@Connect': resolve('connect'),
+        // '@Connect': resolve('connect'),
         "@Store": resolve('store')
     }
 

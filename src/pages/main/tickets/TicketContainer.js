@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 
 import { Route , Redirect , withRouter} from 'react-router-dom'
+import BScroll from 'better-scroll'
 // 功能组件
 import { Header , Icon  } from '@Commons'
 // 样式组件
@@ -13,6 +14,20 @@ import TicketCinemas from './TicketCinemas'
 
 
 class TicketContainer extends Component{
+    constructor(){
+        super()
+        this.scroll = {
+            tool: null
+        }
+    }
+    componentDidMount(){
+        this.scroll.tool = new BScroll(this.ticket, {
+            pullUpLoad: {
+                threshold: 50
+            },
+            click: true
+        })
+    }
     shouldComponentUpdate (props, state) {
         // 如果main的状态变化（更改显示的组件）的时候，main会rerender，导致此组件也会rerender -》 redirect
         let { pathname } = props.location
@@ -22,22 +37,26 @@ class TicketContainer extends Component{
         
         return true
     }
+
+
     render(){
-        // console.log(this.props)
         return(
-            <TicketWrapper>
-                <Header
-                    icon={<TicketHeaderLeft><span>北京</span><Icon type={'angle-down'}/></TicketHeaderLeft>}
-                >
-                    <TicketNavBar/>
-                </Header>
-                <TicketContent>
-                    <Route path='/' exact render={()=>{
-                        return <Redirect to='/movies' />
-                    }}/>
-                    <Route path='/movies' exact component={(props) => <TicketMovies {...props}/>}/>
-                    <Route path='/cinemas' exact component={(props) => <TicketCinemas {...props}/>}/>
-                </TicketContent>
+            <TicketWrapper  ref={el=>this.ticket=el}>
+                <div>
+                    <Header
+                        icon={<TicketHeaderLeft><span>北京</span><Icon type={'angle-down'}/></TicketHeaderLeft>}
+                    >
+                        <TicketNavBar/>
+                    </Header>
+                    <TicketContent>
+                        <Route path='/' exact render={()=>{
+                            if ( this.props.selectedTab ) return ''
+                            return <Redirect to='/movies' />
+                        }}/>
+                        <Route path='/movies' exact component={(props) => <TicketMovies {...props} scroll = { this.scroll } />}/>
+                        <Route path='/cinemas' exact component={(props) => <TicketCinemas {...props} scroll = { this.scroll } />}/>
+                    </TicketContent>
+                </div>
 
             </TicketWrapper>
         )

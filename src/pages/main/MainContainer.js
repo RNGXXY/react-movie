@@ -16,24 +16,32 @@ import MineIconActive from '@As/images/mine-active.png'
 // 子组件
 import HomeContainer from './home/HomeContainer'
 import TicketContainer from './tickets/TicketContainer'
+import MinetContainer from './mine/MineContainer'
+import FindContainer from './find/FindContainer'
 
 class TabBarExample extends Component {
     constructor(props) {
         super(props);
+        let selectedTab = 'watch'
         this.state = {
-            selectedTab: 'movies', 
+            selectedTab: selectedTab,
             hidden: false,
             fullScreen: true, // 是否全屏
             tabs: [
-                { id: uuid(), title: '看片', selected: 'movies', component:<HomeContainer/>, icons: { default: SeeFilmIcon, active: SeeFilmIconActive }  },
-                { id: uuid(), title: '购票', selected: 'tickets', component: <TicketContainer/>, icons: { default: TicketsIcon, active: TicketsIconActive }  },
-                { id: uuid(), title: '地图', selected: 'maps', component: '456', icons: { default: FindIcon, active: FindIconActive }  },
-                { id: uuid(), title: '我的', selected: 'mine', component: '456', icons: { default: MineIcon, active: MineIconActive }  },
+                { id: uuid(), title: '看片', selected: 'watch', component:<HomeContainer/>, icons: { default: SeeFilmIcon, active: SeeFilmIconActive }  },
+                { id: uuid(), title: '购票', selected: 'tickets', component: <TicketContainer selectedTab = {  selectedTab }/>, icons: { default: TicketsIcon, active: TicketsIconActive }  },
+                { id: uuid(), title: '发现', selected: 'find', component: <FindContainer/>, icons: { default: FindIcon, active: FindIconActive }  },
+                { id: uuid(), title: '我的', selected: 'mine', component: <MinetContainer/>, icons: { default: MineIcon, active: MineIconActive }  },
             ]
-
         };
     }
-
+    componentDidMount () {
+        if ( this.props.location.pathname === '/movies' ) {
+            this.setState({
+                selectedTab: 'tickets'
+            })
+        }
+    }
     componentDidUpdate (props, {selectedTab}) {
         // 如果此时，状态改变说明切换组件，判断如果是从menu切换出来的话，就更改路由为/
         let { selectedTab: stab } = this.state
@@ -79,5 +87,5 @@ class TabBarExample extends Component {
         );
     }
 }
-
+  
 export default withRouter(TabBarExample)

@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 
-export const TicketWrapper = styled.div`
+export const TicketWrapper = styled.section`
     height:100%;
     width:100%;
+   
+    overflow:hidden;
+    >div{
+        padding-top:44px;
+    }
 `
 
 export const TicketHeaderLeft = styled.p`
@@ -50,12 +55,12 @@ export const TicketNavBarSlider = styled.div`
 `
 
 export const TicketContent = styled.div`
-    position:relative
+    position:relative;
+    
 `
 export const TicketTabContent = styled.div`
-    position: absolute;  
-    top: 0;
-    left: 0;
+    /* position: absolute;   */
+    /* height:100%; */
     width: 100%;
 
 `
@@ -64,5 +69,76 @@ export const TickenMovieHeader = styled.div`
     .headerSwitch{
         background:none !important;
         border:none !important;
+    }
+`
+
+export const TabList = styled.div`
+    /* display: flex; 
+    align-items: center; 
+    justify-content: center; */
+    /* height: 1000px; */
+    background: #fff;
+    /* width:100%; */
+`
+
+export const CinemasHeader = styled.div`
+    height:41px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    .navbarCon{
+        width: 88%;
+        .navbar-active{
+            width: 20%;
+            text-align: center;
+            padding-top: 8px;
+            padding-bottom: 12px;
+            font-size: 14px;
+            border-bottom: 2px solid #F74444;
+            color: #F74444;
+        }
+    }
+    .nav-list{
+        flex: 1 1;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:20px;
+        color: #666;
+    }
+`
+
+export const CinemasList = styled.div`
+    .cinemaList{
+        .cinemaItem{
+            .cinemaContent{
+                height: 86px;
+                width: 100%;
+                border-bottom: 1px solid #e7e7e7;
+                padding: 5px 12px 10px;
+                display:flex;
+                flex-direction:column;
+                justify-content:space-around;
+                /* text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden; */
+                .cinemaName{
+                    font-size: 16px;
+                    color: #666;
+                    width: 100%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap; 
+                    overflow: hidden;
+                }
+                .cinemaAddress{
+                    font-size: 14px;
+                    width: 100%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap; 
+                    overflow: hidden;
+                }
+            }
+        }
     }
 `

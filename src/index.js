@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route , Switch } from 'react-router-dom'
 import App from './App';
 import '@Libs'
 import * as serviceWorker from './serviceWorker';
@@ -7,11 +8,19 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from '@Store'
 
+import MainContainer from '@Pages/main/MainContainer'
+import Detail from '@Pages/detail/DetailContainer'
+
 import '@Libs' 
 ReactDOM.render(
     <Provider store = {store} >
         <BrowserRouter>
-            <App />
+            <App>
+                <Switch>
+                    <Route path='/detail' component={Detail}/>
+                    <Route path='/' component={MainContainer}/>
+                </Switch>
+            </App>
         </BrowserRouter>   
     </Provider> 
 , document.getElementById('root'));
