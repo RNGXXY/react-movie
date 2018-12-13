@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {ItemBox} from './styeldComponents'
 
-import Detail from '@Pages/detail/DetailContainer'
 
 class MovieItem extends Component{
 
@@ -12,6 +11,7 @@ class MovieItem extends Component{
         return(
             <div className='movieItem'
                 onClick={
+                    // 路由传参，直接跟在后面，通过withRouter就可以接收到所传的数据
                     ()=>{this.props.history.push('./detail',{
                             cid:data.contentId
                         })}
@@ -39,9 +39,6 @@ class MovieItem extends Component{
                     {
                         this.renderChoose(data)
                     }
-                    {/* <img className="buyTicket" src="https://movie.miguvideo.com/publish/i_www/resource/lovev/miguMovie/images/icon/oreder.png" alt=""/> */}
-                    {/* <img className="wantWatch" src="" alt=""/>
-                    <img className="preBuy" src="" alt=""/> */}
                 </div>
             </ItemBox>
             </div>

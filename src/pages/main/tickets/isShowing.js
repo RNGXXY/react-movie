@@ -8,30 +8,16 @@ class isShowing extends PureComponent{
         super(props)
         this.state={
             isShowingList:[],
-            // flag:false
         }
     }
-    // componentWillMount(){
-    //     this.setState({
-    //         flag:true
-    //     })
-    // }
+    
     async componentDidMount(){
-        // if(!this.state.isShowingList.length){
-            await this.props.watchMovies_actions.getIsShowing()
-            this.setState({
-                isShowingList:this.props.watchMovies.isShowingList.movies
-            })
-        // }
-        // else{
-        //     return false
-        // }
+        await this.props.watchMovies_actions.getIsShowing()
+        this.setState({
+            isShowingList:this.props.watchMovies.isShowingList.movies
+        })
     }
-    // componentWillUnmount(){
-    //     this.setState({
-    //         flag:false
-    //     })
-    // }
+
     render(){
         let { isShowingList } = this.state
         if(!isShowingList.length) return '';

@@ -22,7 +22,7 @@ export const DetailHeader = styled.div`
         top: 10px;
         font-size:30px;
         color: #888;
-        z-index:2;
+        z-index:999;
     }
     .detail-pic-wrap{
         height: 224px;

@@ -18,7 +18,7 @@ class DetailContainer extends PureComponent{
         this.getDetailListAsync(cid)
     }
 
-    // 发送请求获取数据
+    // 发送请求获取详情信息数据
     getDetailListAsync(cid){
         this.axios({
             url:'/migu/publish/i_www/resource/lovev/miguMovie/detail/detail_data.jsp',
@@ -37,7 +37,9 @@ class DetailContainer extends PureComponent{
     }
 
     render(){
+        // 详情数据，通过axios得到的
         let { detailList } = this.state
+        // 推荐影片数据，通过connect得到的
         let { recommendList } = this.props.detail
 
         if(!Object.keys(detailList).length || !recommendList.length) return ''
@@ -158,4 +160,5 @@ class DetailContainer extends PureComponent{
     }
 }   
 
+// 详情数据通过withrouter得到id，再通过axios去请求，推荐影片因为是公用的，使用redux存放在store中
 export default withRouter(connect(DetailContainer,[{name:'detail',state:['recommendList']}]))
