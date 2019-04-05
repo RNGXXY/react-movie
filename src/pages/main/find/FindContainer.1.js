@@ -75,7 +75,6 @@ class soonShowing extends PureComponent{
 
     }; 
     onEndReached = (event) => { // 上啦加载的逻辑
-        console.log('onEndReached')
         if (this.state.isLoading || !this.state.hasMore) {
           return;
         }
@@ -96,7 +95,6 @@ class soonShowing extends PureComponent{
     }
 
     render(){
-        console.log(111)
         return(
             <div style={{width:'100%'}}>
                 <ListView

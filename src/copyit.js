@@ -14,8 +14,8 @@ class Copy extends Component{
 export default Copy
 
 
-import styeld from 'styled-components'
+import styled from 'styled-components'
 
-export const Wrapper = styeld.div`
+export const Wrapper = styled.div`
     
 `

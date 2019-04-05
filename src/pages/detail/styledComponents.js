@@ -4,6 +4,7 @@ export const DetailWrapper = styled.section`
     height:${()=>`${document.documentElement.clientHeight}px`};
     width: 100%;
     padding-bottom:42px;
+    position:relative;
 `
 export const DetailContent = styled.div`
     height:100%;

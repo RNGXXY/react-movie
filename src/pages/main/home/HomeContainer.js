@@ -30,7 +30,6 @@ class HomeContainer extends PureComponent{
             commonSwiperData:watchMovieList.splice(1,watchMovieList.length-2),
             activeData:watchMovieList[watchMovieList.length-1]
         })
-        // console.log(this.state.commonSwiperData)
         this.scroll.tool = new BScroll(this.el, {
             pullUpLoad: {
                 threshold: 50

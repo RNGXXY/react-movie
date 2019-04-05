@@ -52,7 +52,6 @@ class SoonShowing extends PureComponent{
             let { tool } = this.props.scroll
             tool.on('pullingUp', async () => {
                 if ( this.datasource.length < this.pageNum * this.pageSize ) return false
-                console.log('获取数据', this.pageNum)
                 // 在这个项目中，不需要每次上啦获取数据了
                 this.setItems()
                 this.pageNum ++;

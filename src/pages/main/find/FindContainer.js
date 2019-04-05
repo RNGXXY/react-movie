@@ -83,7 +83,6 @@ class FindContainer extends PureComponent{
     
     // 上啦加载的逻辑
     onEndReached = () => { 
-        console.log('onEndReached')
         if (this.state.isLoading || !this.state.hasMore) {
           return;
         }
@@ -93,7 +92,6 @@ class FindContainer extends PureComponent{
 
     // 上啦加载的逻辑
     onEndReached = () => { 
-        console.log('onEndReached')
         if (this.state.isLoading || !this.state.hasMore) {
           return;
         }

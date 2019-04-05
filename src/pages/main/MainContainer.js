@@ -22,7 +22,7 @@ import FindContainer from './find/FindContainer'
 class TabBarExample extends Component {
     constructor(props) {
         super(props);
-        let selectedTab = 'mine'
+        let selectedTab = 'watch'
         this.state = {
             selectedTab: selectedTab,
             hidden: false,

@@ -3,11 +3,15 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'murlin-connect'
 import { DetailWrapper , DetailHeader , DetailBody , DetailContent , DetailFooter} from './styledComponents'
 import { Img , Icon , Swiper} from '@Commons'
+// 子组件
+import SeatSelection from './seatSelection/index'
+
 class DetailContainer extends PureComponent{  
     constructor(){
         super()
         this.state={
-            detailList:{}
+            detailList:{},
+            isShowSelsection:false
         }
     }
 
@@ -33,6 +37,13 @@ class DetailContainer extends PureComponent{
             }
         }).catch(err=>{
             return false
+        })
+    }
+    
+    // 点击显示选座 
+    onHandleShowSelection = ()=>{
+        this.setState({
+            isShowSelsection:!this.state.isShowSelsection
         })
     }
 
@@ -151,10 +162,21 @@ class DetailContainer extends PureComponent{
                         <Icon type={'pencil-square-o'}/>
                         <span className='foot-title'>写影评</span>
                     </div>
-                    <div className='footer-right footer-flex'>
+                    <div 
+                        onClick={this.onHandleShowSelection}
+                        className='footer-right footer-flex'>
                         <span className='foot-title'>选座购票</span>
                     </div>
                 </DetailFooter>
+                {
+                    this.state.isShowSelsection && (
+                        <SeatSelection 
+                            fileName={detailList.name}
+                            imageUrl={detailList.imgSrc}
+                            onHandleShowSelection={this.onHandleShowSelection}
+                        />  
+                    )
+                }
             </DetailWrapper>
         )
     }
