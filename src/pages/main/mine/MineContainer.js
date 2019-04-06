@@ -26,10 +26,10 @@ class MainContainer extends Component{
                             <img src="/images/defaultPhoto.png" alt=""/>
                         </div>
                     </div>
-                    <div className="head-center">
-                        <div onClick={this.toSign} className="to-login">
+                    <div onClick={this.toSign} className="head-center">
+                        <div  className="to-login">
                             {
-                                this.props.sign.userInfo == {} ? <p>点击登录</p> : <p>{this.props.sign.userInfo.phoneNum}</p>
+                                !Object.keys(this.props.sign.userInfo).length ? <p>点击登录</p> : <p>{this.props.sign.userInfo.phoneNum}</p>
                             }
                         </div>
                     </div>
