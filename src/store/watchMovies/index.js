@@ -24,7 +24,6 @@ const reducer = (
             new_state.soonShowingList = action.payload.data; break 
         case types.GET_CINEMAS_LIST + '_FULFILLED' :
             new_state.cinemasList = action.payload.data; break
-            break
         default : return previous_state
     }
     return new_state   

@@ -1,10 +1,19 @@
 import React,{ Component } from 'react'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'murlin-connect'
 // 功能组件
 import { Header , Icon } from '@Commons'
 // 样式组件
 import { MineWrapper , MineTabs , MineListWrap } from './styledComponents'
 class MainContainer extends Component{
+    constructor(props){
+        super(props)
+    }
 
+    // 去登录页面
+    toSign=()=>{
+        this.props.history.push('./sign')
+    }
     render(){
         return(
             <MineWrapper>
@@ -18,8 +27,10 @@ class MainContainer extends Component{
                         </div>
                     </div>
                     <div className="head-center">
-                        <div className="to-login">
-                            <p>点击登录</p>
+                        <div onClick={this.toSign} className="to-login">
+                            {
+                                this.props.sign.userInfo == {} ? <p>点击登录</p> : <p>{this.props.sign.userInfo.phoneNum}</p>
+                            }
                         </div>
                     </div>
                     <div className="head-right">
@@ -104,4 +115,4 @@ class MainContainer extends Component{
     }
 }
 
-export default MainContainer
+export default withRouter(connect(MainContainer,[{name:'sign',state:['userInfo']}]))

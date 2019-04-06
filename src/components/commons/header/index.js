@@ -7,9 +7,9 @@ class Header extends Component{
     render(){
         return(
             <HeaderContainer>
-                <div className = "header-left">{this.props.icon}</div>
-                <div className = "header-center">{this.props.children}</div>
-                <div className = "header-right">{this.props.rightContent}</div>
+                <div className = "header-left" onClick={this.props.onClickLeft}>{this.props.icon}</div>
+                <div className = "header-center" onClick={this.props.onClickMid}>{this.props.children}</div>
+                <div className = "header-right" onClick={this.props.onClickRight}>{this.props.rightContent}</div>
             </HeaderContainer>
         )
     }

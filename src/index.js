@@ -10,6 +10,7 @@ import store from '@Store'
 
 import MainContainer from '@Pages/main/MainContainer'
 import Detail from '@Pages/detail/DetailContainer'
+import Sign from '@Pages/sign/index'
 
 import '@Libs' 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route path='/detail' component={Detail}/>
+                    <Route path='/sign' component={Sign}/>
                     <Route path='/' component={MainContainer}/>
                 </Switch>
             </App>
