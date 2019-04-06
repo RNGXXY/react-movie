@@ -19,4 +19,27 @@ function change_time(target){
     }
 }
 
-export {inject_unmount , change_time}
+// 为实例原型添加修改时间格式的方法
+function handle_time(target) {
+    target.prototype.handleTime = (timeStamp='0000000000000',sign='-')=> {
+        let date = new Date(timeStamp);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let currentDate = year + sign;
+        if (month >= 10) {
+            currentDate = currentDate + month + sign;
+        } else {
+            currentDate = currentDate + '0' + month + sign;
+        }
+        if (day >= 10) {
+            currentDate = currentDate + day;
+
+        } else {
+            currentDate = currentDate + '0' + day;
+        }
+        return currentDate;
+    }
+}
+
+export {inject_unmount , change_time , handle_time}

@@ -55,7 +55,10 @@ class MainContainer extends Component{
                 </MineTabs>
                 <MineListWrap>
                     <div className="mineListItem">
-                        <div className="mineListItemContent">
+                        <div 
+                            className="mineListItemContent" 
+                            onClick={ ()=>{this.props.history.push('./order')}}
+                        >
                             <div className="pull-left">
                                 <img src="/images/order.png" alt=""/>
                                 <p>我的订单</p>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Icon } from '@Commons'
+import {connect} from 'murlin-connect'
 // 样式组件
 import { SelectModal,
          SelectWrap,
@@ -15,6 +16,7 @@ class SeatSelection extends Component {
     super(props)
     this.state={
       selectOrderList:[],   // 选中的座位表
+      price:29.9,
       arr : [
         [{seat:1,isSelled:false,isClicked:false},{seat:2,isSelled:false,isClicked:false},{seat:3,isSelled:false,isClicked:false},{seat:4,isSelled:false,isClicked:false},{seat:5,isSelled:false,isClicked:false},
          {seat:6,isSelled:false,isClicked:false},{seat:7,isSelled:false,isClicked:false},{seat:8,isSelled:false,isClicked:false},{seat:9,isSelled:false,isClicked:false},{seat:10,isSelled:false,isClicked:false}],
@@ -48,6 +50,8 @@ class SeatSelection extends Component {
     // 发送请求
   }
 
+
+  // 控制选中的座位
   onHandleIsClicked = (row,list,isClicked,isSelled) => {
     if(isSelled) return false
     let newArr = this.state.arr
@@ -74,6 +78,23 @@ class SeatSelection extends Component {
       selectOrderList:newSelectOrderList
     })
   }
+
+  // 点击确认选座
+  onSureSeat = () => {
+   if(this.state.selectOrderList.length){
+    let time = new Date().getTime()
+    let order = {
+      filmName:this.props.fileName,
+      price:(this.state.selectOrderList.length*this.state.price).toFixed(2),
+      selectOrderList:this.state.selectOrderList,
+      cinema:'某某电影院',
+      time
+    }
+    this.props.order_actions.handleOrderList(order)
+   }
+    this.props.onHandleShowSelection()
+  }
+
   render() {
     return (
       <SelectModal>
@@ -113,7 +134,7 @@ class SeatSelection extends Component {
                 this.state.selectOrderList.map((item,index)=>(
                   <div key={index} className='selectionsInfo'>
                     <div className='seatInfo'>{item.row}排{item.list}座</div>
-                    <div className='price'>￥29.9</div>
+                    <div className='price'>￥{this.state.price}</div>
                   </div>
                 ))
               }
@@ -121,9 +142,9 @@ class SeatSelection extends Component {
             </div>
             <div 
               className='selectBtn'
-              onClick={this.props.onHandleShowSelection}>
+              onClick={this.onSureSeat}>
               {
-                this.state.selectOrderList.length>0 && <span>￥{(this.state.selectOrderList.length*29.9).toFixed(2)}&nbsp;&nbsp;</span>
+                this.state.selectOrderList.length>0 && <span>￥{(this.state.selectOrderList.length*this.state.price).toFixed(2)}&nbsp;&nbsp;</span>
               }
               <span>确认选座</span>
             </div>
@@ -134,5 +155,4 @@ class SeatSelection extends Component {
   }
 }
 
-export default SeatSelection
-
+export default connect(SeatSelection,[{name:'order',state:['orderList']}])
