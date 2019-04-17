@@ -93,7 +93,7 @@ class Sign extends Component{
           
         </Header>
         <SignLogo>
-          <img src='http://b-ssl.duitang.com/uploads/item/201705/08/20170508190053_JXWUv.jpeg' />
+          <img src='/images/logo.jpeg' />
         </SignLogo>
         <SignForm> 
           <form>
