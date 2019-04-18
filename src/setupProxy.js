@@ -8,4 +8,12 @@ module.exports = function(app){
             '^/migu':''
         }
     }))
+
+    app.use(proxy('/cms',{
+        target:'http://10.2.140.170:9000',
+        changeOrigin:true,
+        pathRewrite:{
+            '^/cms':''
+        }
+    }))
 }

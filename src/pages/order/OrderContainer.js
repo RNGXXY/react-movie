@@ -9,12 +9,24 @@ import { OrderWrapper, OrderList } from './styledComponents'
 class Orderontainer extends Component {
     constructor(props) {
         super(props)
+        this.state={
+            orderList:[]
+        }
     }
-    componentDidMount(){
-        console.log(this.props.order.orderList);
+
+    // 在这里做路由跳转有问题
+    async componentDidMount(){
+        if(Object.keys(this.props.sign.userInfo).length){
+            let resData = await this.axios(`/cms/orderList/dataListByUser?userId=${this.props.sign.userInfo.userId}`)
+            if(resData.data.code == 200){
+                this.setState({
+                    orderList:resData.data.data
+                })
+            }
+        }
+        
     }
     render() {
-        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 10]
         return (
             <OrderWrapper>
                 <Header
@@ -25,25 +37,34 @@ class Orderontainer extends Component {
                 </Header>
                 <OrderList>
                     {
-                        this.props.order.orderList.length > 0 && this.props.order.orderList.map((item, index) => (
+                        this.state.orderList.length > 0 && this.state.orderList.map((item, index) => (
                             <li key={index} className='orderItem'>
                                 <div className='orderItemInfo'>
-                                    <p className='orderItemInfoName'>{item.filmName}&nbsp;&nbsp;&nbsp;{item.selectOrderList.length}张</p>
-                                    <p className='orderItemInfoTime'>{this.handleTime(item.time)}</p>
+                                    <p className='orderItemInfoName'>{item.movieName}&nbsp;&nbsp;&nbsp;{item.number}张</p>
+                                    <p className='orderItemInfoTime'>{this.handleTime(Number(item.orderTime))}</p>
                                     <p className='orderItemInfoCinema'>{item.cinema}</p>
                                 </div>
                                 <div className='orderItemCost'>
-                                    <p className='orderItemMoney'>总价：{item.price}元</p>
-                                    <p className='orderItemState'>已完成</p>
+                                    <p className='orderItemMoney'>总价：{item.money.toFixed(2)}元</p>
+                                    <p className='orderItemState'>{item.state}</p>
                                 </div>
                             </li>
                         ))
                     }
-
+                    {
+                        Object.keys(this.props.sign.userInfo).length == 0 && (
+                            <p>请先登录</p>
+                        )
+                    }
+                    {
+                        !this.state.orderList.length && Object.keys(this.props.sign.userInfo).length > 0 && (
+                            <p>么得记录！</p>
+                        )
+                    }
                 </OrderList>
             </OrderWrapper>
         )
     }
 }
 
-export default connect(Orderontainer,[{name:'order',state:['orderList']}])
+export default connect(Orderontainer,[{name:'order',state:['orderList']},{name:'sign',state:['userInfo']}])

@@ -17,7 +17,7 @@ class Sign extends Component{
 
   // 返回上一页
   goBack=()=>{
-    this.props.history.goBack()
+    this.props.history.push('/')
   }
 
   // 发送验证码

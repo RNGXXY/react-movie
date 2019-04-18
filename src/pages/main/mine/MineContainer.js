@@ -12,6 +12,7 @@ class MainContainer extends Component{
 
     // 去登录页面
     toSign=()=>{
+        if(!Object.keys(this.props.sign.userInfo).length)
         this.props.history.push('./sign')
     }
     render(){
@@ -29,7 +30,7 @@ class MainContainer extends Component{
                     <div onClick={this.toSign} className="head-center">
                         <div  className="to-login">
                             {
-                                !Object.keys(this.props.sign.userInfo).length ? <p>点击登录</p> : <p>{this.props.sign.userInfo.phoneNum}</p>
+                                !Object.keys(this.props.sign.userInfo).length ? <p>点击登录</p> : <p>{this.props.sign.userInfo.userName}</p>
                             }
                         </div>
                     </div>

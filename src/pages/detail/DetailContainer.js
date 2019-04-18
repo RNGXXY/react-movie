@@ -171,6 +171,7 @@ class DetailContainer extends PureComponent{
                 {
                     this.state.isShowSelsection && (
                         <SeatSelection 
+                            movieId = {this.props.location.state.cid}
                             fileName={detailList.name}
                             imageUrl={detailList.imgSrc}
                             onHandleShowSelection={this.onHandleShowSelection}
