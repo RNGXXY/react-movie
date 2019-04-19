@@ -46,7 +46,7 @@ class Orderontainer extends Component {
                                     <p className='orderItemInfoCinema'>{item.cinema}</p>
                                 </div>
                                 <div className='orderItemCost'>
-                                    <p className='orderItemMoney'>总价：{item.money.toFixed(2)}元</p>
+                                    <p className='orderItemMoney'>总价：{Number(item.money).toFixed(2)}元</p>
                                     <p className='orderItemState'>{item.state}</p>
                                 </div>
                             </li>
@@ -56,8 +56,10 @@ class Orderontainer extends Component {
                         Object.keys(this.props.sign.userInfo).length == 0 && (
                             <Result
                             img={myImg('https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg')}
-                            title="请登录先"
+                            // title="请登录先"
+                            buttonText='请登录先'
                             // message="由于你的支付宝账户还未绑定淘宝账户请登请登录www.taobao.com"
+                            onButtonClick = {()=>this.props.history.push('/sign')}
                             />
                         )
                     }

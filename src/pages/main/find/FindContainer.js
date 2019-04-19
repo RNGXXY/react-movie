@@ -70,14 +70,14 @@ class FindContainer extends PureComponent{
 
      // 获取数据后，更改真正的数据源，并且操作开关
     handleData(){
-        setTimeout(()=>{
             this.getInfos()
+             setTimeout(()=>{
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(this.datasource),
                 refreshing: false,
                 isLoading: false
             })
-        },1500)
+        },500)
     }
     
     // 上啦加载的逻辑

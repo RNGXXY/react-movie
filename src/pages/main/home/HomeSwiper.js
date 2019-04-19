@@ -47,8 +47,8 @@ class HomeSwiper extends PureComponent{
         let { list : movieList} = data
             return movieList.map((val, index) => (
             <HomeSwiperImgBox
-                key={val}
-                href="javacript:void(0);"
+                key={index}
+                href={val.wapUrl}
                 top={ this.state.slideIndex === index  }
             >
                 <img

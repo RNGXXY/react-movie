@@ -21,7 +21,7 @@ class MovieItem extends Component{
                 <div className="img-box"
                     
                 >
-                    <img src={`http://localhost:3000/migu/${data.picAddr}`} alt=""/>
+                    <img src={`https://movie.miguvideo.com${data.picAddr}`} alt=""/>
 
                 </div>
                 <div className="content">

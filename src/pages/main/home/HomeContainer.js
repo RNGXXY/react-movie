@@ -54,7 +54,7 @@ class HomeContainer extends PureComponent{
                     icon={<Icon type={'folder-o'}/>}
                     rightContent={<Icon type={'search'}/>}
                 >
-                    咪咕影院
+                    影说网
                    
                 </Header>
                 <NoticeBar marqueeProps={{ loop: true, style: { padding: '0 7.5px', color : '#333'} }}>
