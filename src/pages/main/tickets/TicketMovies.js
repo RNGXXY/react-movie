@@ -66,10 +66,10 @@ class TicketMovies extends Component{
 
 
     onChange = (e) => {
-        console.log(`selectedIndex:${e.nativeEvent.selectedSegmentIndex}`);
+        // console.log(`selectedIndex:${e.nativeEvent.selectedSegmentIndex}`);
       }
     onValueChange = (value) => {
-    console.log(value);
+    // console.log(value);
     }
 }
 

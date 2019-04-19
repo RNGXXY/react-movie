@@ -53,8 +53,7 @@ class FindContainer extends PureComponent{
     // 获取资讯的数据
     getInfos(){
         let { informationData } = this.state
-        // console.log(informationData)
-        let infoData = this.getItemsByPage(this.state.informationData[3].list)
+        let infoData = this.getItemsByPage(informationData[3].list)
         // 在替身数据后连接每次获取到的新的数据
         this.datasource =  this.datasource.concat(infoData)
         // 获取之后增加要请求的页面数

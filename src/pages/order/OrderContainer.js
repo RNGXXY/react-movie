@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'murlin-connect'
 import { handle_time } from '@Libs/decorator' 
+import { Result } from 'antd-mobile';
 // 功能组件
 import { Header, Icon } from '@Commons'
 import { OrderWrapper, OrderList } from './styledComponents'
-
+const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt="" />;
 @handle_time
 class Orderontainer extends Component {
     constructor(props) {
@@ -53,12 +54,20 @@ class Orderontainer extends Component {
                     }
                     {
                         Object.keys(this.props.sign.userInfo).length == 0 && (
-                            <p>请先登录</p>
+                            <Result
+                            img={myImg('https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg')}
+                            title="请登录先"
+                            // message="由于你的支付宝账户还未绑定淘宝账户请登请登录www.taobao.com"
+                            />
                         )
                     }
                     {
                         !this.state.orderList.length && Object.keys(this.props.sign.userInfo).length > 0 && (
-                            <p>么得记录！</p>
+                           <Result
+                            img={myImg('https://gw.alipayobjects.com/zos/rmsportal/GIyMDJnuqmcqPLpHCSkj.svg')}
+                            title="么得记录"
+                            // message="由于你的支付宝账户还未绑定淘宝账户请登请登录www.taobao.com"
+                            />
                         )
                     }
                 </OrderList>
