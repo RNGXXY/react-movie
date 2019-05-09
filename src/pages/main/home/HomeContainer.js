@@ -1,6 +1,7 @@
 import React,{ PureComponent } from 'react'
 import { connect } from 'murlin-connect'
 import BScroll from 'better-scroll'
+import { withRouter } from 'react-router-dom';
 
 // 功能组件
 import { Header , Icon  , Swiper , Active} from '@Commons' 
@@ -53,6 +54,7 @@ class HomeContainer extends PureComponent{
                 <Header
                     icon={<Icon type={'folder-o'}/>}
                     rightContent={<Icon type={'search'}/>}
+                    onClickRight={()=>{this.props.history.push('./search')}}
                 >
                     影说网
                    
@@ -99,4 +101,4 @@ class HomeContainer extends PureComponent{
 }
 
 // export default HomeContainer
-export default connect(HomeContainer,[{name:'watchMovies',state:['watchMovieList']}])
+export default withRouter(connect(HomeContainer,[{name:'watchMovies',state:['watchMovieList']}]))

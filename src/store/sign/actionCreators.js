@@ -15,7 +15,14 @@ const actionCreator = {
             })
         }
     },
-    
+    exitSign(){
+        return {
+            type: types.EXIT_SIGN,
+            payload:{
+                data:{}
+            }
+        }
+    }
     
 }
 

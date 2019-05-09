@@ -109,7 +109,7 @@ class FindContainer extends PureComponent{
             
             <FindWrapper className='find'>
                 <Header  rightContent={<Icon type={'search'}/>} >
-                    发现
+                    资讯
                 </Header>
                 <FindContent>
                     <ListView

@@ -5,13 +5,23 @@ import { DetailWrapper , DetailHeader , DetailBody , DetailContent , DetailFoote
 import { Img , Icon , Swiper} from '@Commons'
 // 子组件
 import SeatSelection from './seatSelection/index'
+import SceneSelection from './sceneSelection/index'
+import CilemaSelection from './cilemaSection/index'
 
 class DetailContainer extends PureComponent{  
     constructor(){
         super()
         this.state={
             detailList:{},
-            isShowSelsection:false
+            isShowSelsection:false, // 作为选择展示
+            isCollection:false, 
+            isShowScene:false,  // 场次选择展示
+            isShowCilema:false, // 影院选择展示
+            sceneId:'',         // 场次ID
+            sceneTime:'',       // 场次时间
+            cinemaHall:'',      // 影厅名称
+            cinemaId:'',        // 影院Id
+            cinemaName:'',      // 影院名称
         }
     }
 
@@ -44,6 +54,62 @@ class DetailContainer extends PureComponent{
     onHandleShowSelection = ()=>{
         this.setState({
             isShowSelsection:!this.state.isShowSelsection
+        })
+    }
+
+    // 点击显示场次选择 
+    onHandleShowScene = ()=>{
+        this.setState({
+            isShowScene:!this.state.isShowScene
+        })
+    }
+
+    // 点击显示影院选择 
+    onHandleShowCinema = ()=>{
+        this.setState({
+            isShowCilema:!this.state.isShowCilema
+        })
+    }
+
+    // 场次Id
+    onHandleSceneId = (id,time,hall)=>{
+        this.setState({
+            sceneId:id,
+            sceneTime:time,
+            cinemaHall:hall
+        })
+    }
+
+    // 影院Id
+    onHandleCinemaId = (id,name)=>{
+        this.setState({
+            cinemaId:id,
+            cinemaName:name
+        })
+    }
+
+    // 点击收藏
+    onHandleCollection = ()=>{
+        if(!Object.keys(this.props.sign.userInfo).length){
+            this.props.history.push('/sign')
+            return false
+        }
+        let data = {
+            userId:this.props.sign.userInfo.userId,
+            userName:this.props.sign.userInfo.userName,
+            contId:this.state.detailList.contId,
+            imgSrcV:this.state.detailList.imgSrc,
+            movieName:this.state.detailList.name,
+            detailType:this.state.detailList.DetailType,
+            area:this.state.detailList.region,
+        }
+        this.axios({
+            url:'/cms/collectionList/addData',
+            method:'POST',
+            data
+        })
+        this.setState({
+            isCollection:true
         })
     }
 
@@ -154,25 +220,56 @@ class DetailContainer extends PureComponent{
                     </DetailBody>
                 </DetailContent>
                 <DetailFooter>
-                    <div className='footer-left footer-flex'>
-                        <Icon type={'star-o'}/>
+                    <div 
+                        className='footer-left footer-flex'
+                        onClick={this.onHandleCollection}
+                        style={{color:this.state.isCollection?'rgb(247, 68, 68)':'#000'}}
+                        >
+                        <Icon type={'star-o'} />
                         <span className='foot-title'>收藏</span>
                     </div>
                     <div className='footer-center footer-flex'>
-                        <Icon type={'pencil-square-o'}/>
-                        <span className='foot-title'>写影评</span>
+                        {/* <Icon type={'pencil-square-o'}/>
+                        <span className='foot-title'></span> */}
                     </div>
                     <div 
-                        onClick={this.onHandleShowSelection}
+                        onClick={this.onHandleShowCinema}
                         className='footer-right footer-flex'>
                         <span className='foot-title'>选座购票</span>
                     </div>
                 </DetailFooter>
                 {
+                    this.state.isShowCilema && 
+                    <CilemaSelection 
+                        isShowScene = {this.state.isShowScene}
+                        filmId={detailList.filmId}
+                        onHandleCinemaId = {this.onHandleCinemaId}
+                        onHandleShowScene = {this.onHandleShowScene}
+                        onHandleShowCinema = {this.onHandleShowCinema}
+                    />
+                }
+                {
+                    this.state.isShowScene && 
+                    <SceneSelection 
+                        cinemaId={this.state.cinemaId}
+                        filmId={detailList.filmId}
+                        onHandleShowScene = {this.onHandleShowScene}
+                        onHandleSceneId = {this.onHandleSceneId}
+                        onHandleShowSelection={this.onHandleShowSelection}
+                    />
+                }
+                {
                     this.state.isShowSelsection && (
                         <SeatSelection 
                             movieId = {this.props.location.state.cid}
+                            sceneId = {this.state.sceneId}
+                                
+                            sceneTime={this.state.sceneTime}       
+                            cinemaHall={this.state.cinemaHall}      
+                            cinemaId={this.state.cinemaId}        
+                            cinemaName={this.state.cinemaName}      
                             fileName={detailList.name}
+
                             imageUrl={detailList.imgSrc}
                             onHandleShowSelection={this.onHandleShowSelection}
                         />  
@@ -184,4 +281,4 @@ class DetailContainer extends PureComponent{
 }   
 
 // 详情数据通过withrouter得到id，再通过axios去请求，推荐影片因为是公用的，使用redux存放在store中
-export default withRouter(connect(DetailContainer,[{name:'detail',state:['recommendList']}]))
+export default withRouter(connect(DetailContainer,[{name:'detail',state:['recommendList']},{name:'sign',state:['userInfo']}]))

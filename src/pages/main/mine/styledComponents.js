@@ -96,3 +96,14 @@ export const MineListWrap = styled.div`
         }
     }
 `
+
+export const ExitSign = styled.div`
+    height:44px;
+    background:#fff;
+    line-height:44px;
+    text-align:center;
+    :active{
+        background:rgb(247, 68, 68);
+        color:#fff;
+    }
+`

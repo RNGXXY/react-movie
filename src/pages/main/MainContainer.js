@@ -30,7 +30,7 @@ class TabBarExample extends Component {
             tabs: [
                 { id: uuid(), title: '看片', selected: 'watch', component:<HomeContainer/>, icons: { default: SeeFilmIcon, active: SeeFilmIconActive }  },
                 { id: uuid(), title: '购票', selected: 'tickets', component: <TicketContainer selectedTab = {  selectedTab }/>, icons: { default: TicketsIcon, active: TicketsIconActive }  },
-                { id: uuid(), title: '发现', selected: 'find', component: <FindContainer/>, icons: { default: FindIcon, active: FindIconActive }  },
+                { id: uuid(), title: '资讯', selected: 'find', component: <FindContainer/>, icons: { default: FindIcon, active: FindIconActive }  },
                 { id: uuid(), title: '我的', selected: 'mine', component: <MinetContainer/>, icons: { default: MineIcon, active: MineIconActive }  },
             ]
         };

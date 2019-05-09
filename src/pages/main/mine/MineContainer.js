@@ -4,7 +4,7 @@ import {connect} from 'murlin-connect'
 // 功能组件
 import { Header , Icon } from '@Commons'
 // 样式组件
-import { MineWrapper , MineTabs , MineListWrap } from './styledComponents'
+import { MineWrapper , MineTabs , MineListWrap , ExitSign } from './styledComponents'
 class MainContainer extends Component{
     constructor(props){
         super(props)
@@ -41,16 +41,16 @@ class MainContainer extends Component{
                 <MineTabs>
                     <div className="tablist">
                         <div className="tabItem">
-                            <img src="/images/colle.png" alt=""/>
-                            <p>收藏</p>
+                            <img src="/images/serv-online.png" alt=""/>
+                            <p>影</p>
                         </div>
                         <div className="tabItem">
                             <img src="/images/mov-com.png" alt=""/>
-                            <p>影评</p>
+                            <p>说</p>
                         </div>
                         <div className="tabItem">
                             <img src="/images/play-his.png" alt=""/>
-                            <p>播放记录</p>
+                            <p>网</p>
                         </div>
                     </div>
                 </MineTabs>
@@ -70,6 +70,20 @@ class MainContainer extends Component{
                         </div>
                     </div>
                     <div className="mineListItem">
+                        <div 
+                            className="mineListItemContent"
+                            onClick={ ()=>{this.props.history.push('./collection')}}
+                        >
+                            <div className="pull-left">
+                                <img src="/images/colle.png" alt=""/>
+                                <p>我的收藏</p>
+                            </div>
+                            <div className="pull-right">
+                                <Icon type={'angle-right'}/>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className="mineListItem">
                         <div className="mineListItemContent">
                             <div className="pull-left">
                                 <img src="/images/wallet (1).png" alt=""/>
@@ -79,8 +93,8 @@ class MainContainer extends Component{
                                 <Icon type={'angle-right'}/>
                             </div>
                         </div>
-                    </div>
-                    <div className="mineListItem">
+                    </div> */}
+                    {/* <div className="mineListItem">
                         <div className="mineListItemContent">
                             <div className="pull-left">
                                 <img src="/images/question.png" alt=""/>
@@ -90,23 +104,14 @@ class MainContainer extends Component{
                                 <Icon type={'angle-right'}/>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+                   
                     <div className="mineListItem">
-                        <div className="mineListItemContent">
-                            <div className="pull-left">
-                                <img src="/images/serv-online.png" alt=""/>
-                                <p>在线客服</p>
-                            </div>
-                            <div className="pull-right">
-                                <Icon type={'angle-right'}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mineListItem">
-                        <div className="mineListItemContent">
+                        <div className="mineListItemContent"
+                        onClick={ ()=>{this.props.history.push('./prototype')}}>
                             <div className="pull-left">
                                 <img src="/images/shopping.png" alt=""/>
-                                <p>商城</p>
+                                <p>用户须知</p>
                             </div>
                             <div className="pull-right">
                                 <Icon type={'angle-right'}/>
@@ -114,6 +119,15 @@ class MainContainer extends Component{
                         </div>
                     </div>
                 </MineListWrap>
+                {
+                    Object.keys(this.props.sign.userInfo).length>0 && 
+                    <ExitSign
+                        onClick={this.props.sign_actions.exitSign}
+                    >
+                        退出登录
+                    </ExitSign>
+                }
+                
             </MineWrapper>
         )
     }

@@ -18,8 +18,10 @@ const reducer = (
     let new_state = Object.assign({},previous_state)
     switch(action.type){
         case types.GET_USERINFO + '_FULFILLED' :
-        if(action.payload.data.code==200)
+            if(action.payload.data.code==200)
             new_state.userInfo = action.payload.data.data; break
+        case types.EXIT_SIGN :
+            new_state.userInfo = action.payload.data; break
         default : return previous_state
     }
     return new_state   

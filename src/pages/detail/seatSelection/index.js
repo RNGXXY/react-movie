@@ -39,7 +39,7 @@ class SeatSelection extends Component {
 
   // 获取当前座位情况
   onGetSeatState = async () => {
-    let resData = await this.axios(`/cms/seat/getSeatById?movieId=${this.props.movieId}`)
+    let resData = await this.axios(`/cms/seat/getSeatById?movieId=${this.props.movieId}&sceneId=${this.props.sceneId}`)
     if (resData.data.code == 200) {
       if (resData.data.data.length) {
         let newArr = this.state.arr
@@ -88,6 +88,7 @@ class SeatSelection extends Component {
       this.props.history.push('/sign')
     }else if (this.state.selectOrderList.length ){
       this.occupySeat()
+      this.props.history.push('./pay',{payMoney:(this.state.selectOrderList.length * this.state.price).toFixed(2)})
     }
   }
 
@@ -104,8 +105,10 @@ class SeatSelection extends Component {
       url:'/cms/seat/setSeatList',
       data:{
         movieId:this.props.movieId,
+        sceneId:this.props.sceneId,
         movieName:this.props.fileName,
         seatList,
+        
       }
     })
     if(resDate.data.code == 200 ){
@@ -137,8 +140,12 @@ class SeatSelection extends Component {
         money : (this.state.selectOrderList.length * this.state.price).toFixed(2),
         number : this.state.selectOrderList.length ,
         state : '已完成' ,
-        cinema : '万达电影院',
-        orderContent:this.state.selectOrderList
+        cinema : this.props.cinemaName,
+        orderContent:this.state.selectOrderList,
+        sceneTime:this.props.sceneTime,      
+        cinemaHall:this.props.cinemaHall,    
+        cinemaId:this.props.cinemaId,  
+        sceneId:this.props.sceneId    
       }
     })
   }
@@ -185,7 +192,7 @@ class SeatSelection extends Component {
           </SelectBody>
           <SelectFooter>
             <div className='selections'>
-              <p>已选座位：{this.state.selectOrderList.length >= 5 && <span>最多只能选5个座位哦</span>}</p>
+              <p>已选座位 (建议选择连坐)：{this.state.selectOrderList.length >= 5 && <span>最多只能选5个座位哦</span>}</p>
               <div className='selectionsList'>
                 {
                   this.state.selectOrderList.map((item, index) => (

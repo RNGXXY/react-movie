@@ -20,13 +20,22 @@ class TicketContainer extends Component{
             tool: null
         }
     }
-    componentDidMount(){
+    async componentDidMount(){
         this.scroll.tool = new BScroll(this.ticket, {
             pullUpLoad: {
                 threshold: 50
             },
             click: true
         })
+
+        let resData = await this.axios({
+            url:'/bddt/location/ip',
+            params:{
+                ak:'EajH3hpCLeGgNMbnPqbVl1Bm9PWGD0HO'
+            }
+        })
+        console.log(11,resData)
+
     }
     shouldComponentUpdate (props, state) {
         // 如果main的状态变化（更改显示的组件）的时候，main会rerender，导致此组件也会rerender -》 redirect

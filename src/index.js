@@ -12,6 +12,10 @@ import MainContainer from '@Pages/main/MainContainer'
 import Detail from '@Pages/detail/DetailContainer'
 import Sign from '@Pages/sign/index'
 import Order from '@Pages/order/OrderContainer'
+import Search from '@Pages/search/SearchContainer'
+import Pay from '@Pages/pay/index'
+import Collection from '@Pages/collection/index'
+import Prototype from '@Pages/prototype/index'
 
 import '@Libs' 
 ReactDOM.render(
@@ -22,6 +26,10 @@ ReactDOM.render(
                     <Route path='/detail' component={Detail}/>
                     <Route path='/sign' component={Sign}/>
                     <Route path='/order' component={Order}/>
+                    <Route path='/search' component={Search}/>
+                    <Route path='/pay' component={Pay}/>
+                    <Route path='/collection' component={Collection}/>
+                    <Route path='/prototype' component={Prototype}/>
                     <Route path='/' component={MainContainer}/>
                 </Switch>
             </App>
