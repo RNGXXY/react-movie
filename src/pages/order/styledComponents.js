@@ -12,7 +12,7 @@ export const OrderWrapper = styled.div`
 export const OrderList = styled.ul`
   width:100%;
   .orderItem{
-    height:150px;
+    height:160px;
     width:100%;
     padding:10px;
     margin-bottom:10px;
@@ -20,7 +20,7 @@ export const OrderList = styled.ul`
     flex-direction:column;
     background:#fff;
     .orderItemInfo{
-      height:100px;
+      height:110px;
       width:100%;
       display:flex;
       flex-direction:column;
@@ -33,6 +33,15 @@ export const OrderList = styled.ul`
       .orderItemInfoTime{
         font-size: 12px;
         color: #888;
+      }
+      .orderContentList{
+        display:flex;
+        .orderContentItem{
+          width:20%;
+          display:flex;
+          align-items:center;
+          color: #888;
+        }
       }
       .orderItemInfoCinema{
         font-size: 12px;

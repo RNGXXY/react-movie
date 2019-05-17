@@ -45,6 +45,15 @@ class Orderontainer extends Component {
                                     <p className='orderItemInfoTime'>{this.handleTime(Number(item.orderTime))}</p>
                                     <p className='orderItemInfoCinema'>{item.cinema}</p>
                                     <p className='orderItemInfoTime'>{item.cinemaHall}&nbsp;&nbsp;&nbsp;&nbsp;{item.sceneTime}开</p>
+                                    <div className="orderContentList">
+                                        {
+                                            item.orderContent.map((oItem,oIndex)=>(
+                                                <p key={oIndex} className="orderContentItem">
+                                                    {oItem.row}排{oItem.list}列
+                                                </p>
+                                            ))
+                                        }
+                                    </div>
                                 </div>
                                 <div className='orderItemCost'>
                                     <p className='orderItemMoney'>总价：{Number(item.money).toFixed(2)}元</p>
